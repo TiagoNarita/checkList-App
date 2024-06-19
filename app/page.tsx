@@ -1,3 +1,4 @@
+import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -9,7 +10,9 @@ export default function Home() {
             <h1 className={styles.title}>Create Account</h1>
             <div className={styles.socialContainer}>
               <a href="#">
-                <i></i>
+                <i>
+                  <FaGooglePlusG />
+                </i>
               </a>
               <a href="#">
                 <i></i>
@@ -19,14 +22,24 @@ export default function Home() {
               </a>
             </div>
             <p className={styles.p}>or use email for registration</p>
+
+            <FaGooglePlusG />
             <input
               className={styles.inputPlace}
               type="text"
               placeholder="Name"
             />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button>Sign Up</button>
+            <input
+              className={styles.inputPlace}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              className={styles.inputPlace}
+              type="password"
+              placeholder="Password"
+            />
+            <button className={styles.buttonPut}>Sign Up</button>
           </form>
         </div>
         {/* login div part */}
@@ -34,22 +47,38 @@ export default function Home() {
           <form className={styles.form}>
             <h1 className={styles.title}>sign In</h1>
             <div className={styles.socialContainer}>
-              <a href="#">
-                <i></i>
+              <a href="#" className={styles.icon}>
+                <i>
+                  <FaFacebookF />
+                </i>
               </a>
-              <a href="#">
-                <i></i>
+              <a href="#" className={styles.icon}>
+                <i>
+                  <FaGooglePlusG />
+                </i>
               </a>
-              <a href="#">
-                <i></i>
+              <a href="#" className={styles.icon}>
+                <i>
+                  <FaLinkedinIn />
+                </i>
               </a>
             </div>
             <p className={styles.p}>or use your account</p>
 
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a href="#">Forget your Password?</a>
-            <button>Sign In</button>
+            <input
+              className={styles.inputPlace}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              className={styles.inputPlace}
+              type="password"
+              placeholder="Password"
+            />
+            <a href="#" className={styles.icon}>
+              Forget your Password?
+            </a>
+            <button className={styles.buttonPut}>Sign In</button>
           </form>
         </div>
         <div className={styles.overlayContainer}>
@@ -58,14 +87,14 @@ export default function Home() {
             <p className={styles.p}>
               To keep connected with us please login with your personal info
             </p>
-            <button>Sign In</button>
+            <button className={styles.buttonPut}>Sign In</button>
           </div>
           <div className={styles.overlayRight}>
             <h1 className={styles.title}>Hello, Friend</h1>
             <p className={styles.p}>
               Enter your personal details and start journey with us
             </p>
-            <button>Sign In</button>
+            <button className={styles.buttonPut}>Sign In</button>
           </div>
         </div>
       </div>
