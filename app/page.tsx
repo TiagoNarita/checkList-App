@@ -71,7 +71,9 @@ export default function Home() {
         {/* login div part */}
         <div className={styles.signIn}>
           <form className={styles.form}>
+            <h1 className={styles.title}>Todo-APP</h1>
             <h1 className={styles.title}>sign In</h1>
+
             <div className={styles.socialContainer}>
               <a href="#" className={styles.icon}>
                 <i>
