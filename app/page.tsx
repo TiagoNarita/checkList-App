@@ -1,29 +1,49 @@
+"use client";
+
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import styles from "./page.module.css";
+import { useState } from "react";
 
 export default function Home() {
+  const [isRightPanelActive, setIsRightPanelActive] = useState(false);
+
+  const handleSignUpClick = () => {
+    setIsRightPanelActive(true);
+  };
+
+  const handleSignInClick = () => {
+    setIsRightPanelActive(false);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
+    <main id="main" className={styles.main}>
+      <div
+        className={`${styles.container} ${
+          isRightPanelActive ? styles.rightPanelActive : ""
+        }`}
+      >
         <div className={styles.signUp}>
           <form className={styles.form}>
             <h1 className={styles.title}>Create Account</h1>
             <div className={styles.socialContainer}>
-              <a href="#">
+              <a href="#" className={styles.icon}>
+                <i>
+                  <FaFacebookF />
+                </i>
+              </a>
+              <a href="#" className={styles.icon}>
                 <i>
                   <FaGooglePlusG />
                 </i>
               </a>
-              <a href="#">
-                <i></i>
-              </a>
-              <a href="#">
-                <i></i>
+              <a href="#" className={styles.icon}>
+                <i>
+                  <FaLinkedinIn />
+                </i>
               </a>
             </div>
             <p className={styles.p}>or use email for registration</p>
 
-            <FaGooglePlusG />
             <input
               className={styles.inputPlace}
               type="text"
@@ -88,7 +108,11 @@ export default function Home() {
               <p className={styles.p}>
                 To keep connected with us please login with your personal info
               </p>
-              <button className={styles.buttonPut} id={styles.signInButton}>
+              <button
+                onClick={handleSignInClick}
+                className={styles.buttonPut}
+                id={styles.signInButton}
+              >
                 Sign In
               </button>
             </div>
@@ -97,14 +121,18 @@ export default function Home() {
               <p className={styles.p}>
                 Enter your personal details and start journey with us
               </p>
-              <button className={styles.buttonPut} id={styles.signInButton}>
+              <button
+                onClick={handleSignUpClick}
+                className={styles.buttonPut}
+                id={styles.signInButton}
+              >
                 Sign Up
               </button>
             </div>
           </div>
         </div>
       </div>
-      <script type="text/javascript"></script>
+      <script type="text/javascript">const</script>
     </main>
   );
 }
