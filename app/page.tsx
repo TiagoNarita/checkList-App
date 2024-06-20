@@ -82,22 +82,29 @@ export default function Home() {
           </form>
         </div>
         <div className={styles.overlayContainer}>
-          <div className={styles.overlayLeft}>
-            <h1 className={styles.title}>Welcome Back!</h1>
-            <p className={styles.p}>
-              To keep connected with us please login with your personal info
-            </p>
-            <button className={styles.buttonPut}>Sign In</button>
-          </div>
-          <div className={styles.overlayRight}>
-            <h1 className={styles.title}>Hello, Friend</h1>
-            <p className={styles.p}>
-              Enter your personal details and start journey with us
-            </p>
-            <button className={styles.buttonPut}>Sign In</button>
+          <div className={styles.overlay}>
+            <div className={styles.overlayLeft}>
+              <h1 className={styles.title}>Welcome Back!</h1>
+              <p className={styles.p}>
+                To keep connected with us please login with your personal info
+              </p>
+              <button className={styles.buttonPut} id={styles.signInButton}>
+                Sign In
+              </button>
+            </div>
+            <div className={styles.overlayRight}>
+              <h1 className={styles.title}>Hello, Friend</h1>
+              <p className={styles.p}>
+                Enter your personal details and start journey with us
+              </p>
+              <button className={styles.buttonPut} id={styles.signInButton}>
+                Sign Up
+              </button>
+            </div>
           </div>
         </div>
       </div>
+      <script type="text/javascript"></script>
     </main>
   );
 }
