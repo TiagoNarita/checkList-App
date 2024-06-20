@@ -2,7 +2,7 @@
 
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import styles from "./page.module.css";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function Home() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
@@ -14,6 +14,10 @@ export default function Home() {
   const handleSignInClick = () => {
     setIsRightPanelActive(false);
   };
+
+  async function handleLogin(event: FormEvent) {
+    event.preventDefault();
+  }
 
   return (
     <main id="main" className={styles.main}>
@@ -59,7 +63,9 @@ export default function Home() {
               type="password"
               placeholder="Password"
             />
-            <button className={styles.buttonPut}>Sign Up</button>
+            <button onClick={handleLogin} className={styles.buttonPut}>
+              Sign Up
+            </button>
           </form>
         </div>
         {/* login div part */}

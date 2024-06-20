@@ -1,5 +1,10 @@
 :root {
   --var-gray-500: #f6f5f7;
+  --var-strong-blue: #022f40;
+  --var-blue-white: #38aecc;
+  --var-blue-400: #0090c1;
+  --var-grey-900: #183446;
+  --var-ocean-blue: #046e8f;
 }
 
 * {
