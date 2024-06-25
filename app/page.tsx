@@ -3,12 +3,24 @@
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import styles from "./page.module.css";
 import { FormEvent, useState } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+interface IFormInput {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export default function Home() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
 
-  const { register } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>();
+
+  console.log(errors);
 
   const handleSignUpClick = () => {
     setIsRightPanelActive(true);
@@ -16,6 +28,10 @@ export default function Home() {
 
   const handleSignInClick = () => {
     setIsRightPanelActive(false);
+  };
+
+  const handleSingUp: SubmitHandler<IFormInput> = async (data) => {
+    console.log(data);
   };
 
   async function handleLogin(event: FormEvent) {
@@ -31,7 +47,7 @@ export default function Home() {
           }`}
         >
           <div className={styles.signUp}>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSubmit(handleSingUp)}>
               <h1 className={styles.title}>Create Account</h1>
               <div className={styles.socialContainer}>
                 <a href="#" className={styles.icon}>
@@ -56,8 +72,9 @@ export default function Home() {
                 className={styles.inputPlace}
                 type="text"
                 placeholder="Name"
-                {...register("name")}
+                {...register("name", { required: true })}
               />
+              {errors.name?.type === "required" && <p>Name is required</p>}
               <input
                 className={styles.inputPlace}
                 type="email"
@@ -70,7 +87,7 @@ export default function Home() {
                 placeholder="Password"
                 {...register("password")}
               />
-              <button onClick={handleLogin} className={styles.buttonPut}>
+              <button className={styles.buttonPut} type="submit">
                 Sign Up
               </button>
             </form>
@@ -113,9 +130,12 @@ export default function Home() {
               <a href="#" className={styles.icon}>
                 Forget your Password?
               </a>
-              <button className={styles.buttonPut}>Sign In</button>
+              <button onClick={handleLogin} className={styles.buttonPut}>
+                Sign In
+              </button>
             </form>
           </div>
+          {/* transition part */}
           <div className={styles.overlayContainer}>
             <div className={styles.overlay}>
               <div className={styles.overlayLeft}>
@@ -147,7 +167,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <script type="text/javascript">const</script>
       </main>
     </>
   );
