@@ -3,10 +3,12 @@
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import styles from "./page.module.css";
 import { FormEvent, useState } from "react";
-import Head from "next/head";
+import { useForm } from "react-hook-form";
 
 export default function Home() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
+
+  const { register } = useForm();
 
   const handleSignUpClick = () => {
     setIsRightPanelActive(true);
@@ -54,16 +56,19 @@ export default function Home() {
                 className={styles.inputPlace}
                 type="text"
                 placeholder="Name"
+                {...register("name")}
               />
               <input
                 className={styles.inputPlace}
                 type="email"
                 placeholder="Email"
+                {...register("email")}
               />
               <input
                 className={styles.inputPlace}
                 type="password"
                 placeholder="Password"
+                {...register("password")}
               />
               <button onClick={handleLogin} className={styles.buttonPut}>
                 Sign Up
