@@ -3,13 +3,17 @@
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import styles from "./page.module.css";
 import { FormEvent, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface IFormInput {
-  name: string;
-  email: string;
-  password: string;
-}
+const signUpDataSchema = z.object({
+  name: z.string().nonempty("Nome é obrigatório"),
+  email: z.string().email("Email inválido"),
+  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+});
+
+type signUpDataSchema = z.infer<typeof signUpDataSchema>;
 
 export default function Home() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
@@ -18,10 +22,10 @@ export default function Home() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
-
+  } = useForm<signUpDataSchema>({
+    resolver: zodResolver(signUpDataSchema),
+  });
   console.log(errors);
-
   const handleSignUpClick = () => {
     setIsRightPanelActive(true);
   };
@@ -30,9 +34,9 @@ export default function Home() {
     setIsRightPanelActive(false);
   };
 
-  const handleSingUp: SubmitHandler<IFormInput> = async (data) => {
+  function handleSingUp(data: signUpDataSchema) {
     console.log(data);
-  };
+  }
 
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
@@ -41,11 +45,7 @@ export default function Home() {
   return (
     <>
       <main id="main" className={styles.main}>
-        <div
-          className={`${styles.container} ${
-            isRightPanelActive ? styles.rightPanelActive : ""
-          }`}
-        >
+        <div className={`${styles.container} ${isRightPanelActive ? styles.rightPanelActive : ""}`}>
           <div className={styles.signUp}>
             <form className={styles.form} onSubmit={handleSubmit(handleSingUp)}>
               <h1 className={styles.title}>Create Account</h1>
@@ -74,7 +74,7 @@ export default function Home() {
                 placeholder="Name"
                 {...register("name", { required: true })}
               />
-              {errors.name?.type === "required" && <p>Name is required</p>}
+              {errors.name && <p className={styles.error}>{errors.name.message}</p>}
               <input
                 className={styles.inputPlace}
                 type="email"
@@ -117,16 +117,8 @@ export default function Home() {
               </div>
               <p className={styles.p}>or use your account</p>
 
-              <input
-                className={styles.inputPlace}
-                type="email"
-                placeholder="Email"
-              />
-              <input
-                className={styles.inputPlace}
-                type="password"
-                placeholder="Password"
-              />
+              <input className={styles.inputPlace} type="email" placeholder="Email" />
+              <input className={styles.inputPlace} type="password" placeholder="Password" />
               <a href="#" className={styles.icon}>
                 Forget your Password?
               </a>
@@ -153,9 +145,7 @@ export default function Home() {
               </div>
               <div className={styles.overlayRight}>
                 <h1 className={styles.title}>Hello, Friend</h1>
-                <p className={styles.p}>
-                  Enter your personal details and start journey with us
-                </p>
+                <p className={styles.p}>Enter your personal details and start journey with us</p>
                 <button
                   onClick={handleSignUpClick}
                   className={styles.buttonPut}
