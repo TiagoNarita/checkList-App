@@ -1,21 +1,24 @@
 "use client";
 
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import logoImage from "../public/Gray and Black Simple Studio Logo.png";
+import Image from "next/image";
 
 const signUpDataSchema = z.object({
-  name: z.string().min(1, "Nome é obrigatório"),
+  name: z.string().min(1, "Name is required"),
   email: z
     .string({
-      required_error: "Insira um Email",
-      invalid_type_error: "Email Incorreto",
+      required_error: "Enter a valid email",
+      invalid_type_error: "Enter a valid email",
+      message: "Enter a valid email",
     })
-    .email({ message: "Insira um email correto." }),
-  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+    .email({ message: "Enter a valid email" }),
+  password: z.string().min(6, "The password must be at least 6 characters"),
 });
 
 type signUpDataSchema = z.infer<typeof signUpDataSchema>;
@@ -79,19 +82,21 @@ export default function Home() {
                 placeholder="Name"
                 {...register("name", { required: true })}
               />
-              {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+              {errors.name && <p className={styles.errors}>{errors.name.message}</p>}
               <input
                 className={styles.inputPlace}
                 type="email"
                 placeholder="Email"
                 {...register("email")}
               />
+              {errors.email && <p className={styles.errors}>{errors.email.message}</p>}
               <input
                 className={styles.inputPlace}
                 type="password"
                 placeholder="Password"
                 {...register("password")}
               />
+              {errors.password && <p className={styles.errors}>{errors.password?.message}</p>}
               <button className={styles.buttonPut} type="submit">
                 Sign Up
               </button>
@@ -100,7 +105,7 @@ export default function Home() {
           {/* login div part */}
           <div className={styles.signIn}>
             <form className={styles.form}>
-              <h1 className={styles.title}>Todo-APP</h1>
+              <Image src={logoImage} alt="Logo" className={styles.logo} />
               <h1 className={styles.title}>sign In</h1>
 
               <div className={styles.socialContainer}>

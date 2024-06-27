@@ -191,3 +191,17 @@
   border: 1px solid #ccc;
   border-radius: 50%;
 }
+
+.errors {
+  width: 100%;
+  text-align: left;
+  color: #dc143c;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  max-width: 200px; /* ajuste conforme necessário */
+}
