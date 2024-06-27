@@ -8,8 +8,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const signUpDataSchema = z.object({
-  name: z.string().nonempty("Nome é obrigatório"),
-  email: z.string().email("Email inválido"),
+  name: z.string().min(1, "Nome é obrigatório"),
+  email: z
+    .string({
+      required_error: "Insira um Email",
+      invalid_type_error: "Email Incorreto",
+    })
+    .email({ message: "Insira um email correto." }),
   password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
 });
 
