@@ -1,7 +1,7 @@
 "use client";
 
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
-import styles from "./page.module.scss";
+import styles from "../styles/page.module.scss";
 import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -132,7 +132,7 @@ export default function Home() {
               <a href="#" className={styles.icon}>
                 Forget your Password?
               </a>
-              <button onClick={handleLogin} className={styles.buttonPut}>
+              <button onClick={handleLogin} id={styles.signUpButton} className={styles.buttonPut}>
                 Sign In
               </button>
             </form>
