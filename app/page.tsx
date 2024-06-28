@@ -21,7 +21,14 @@ const signUpDataSchema = z.object({
   password: z.string().min(6, "The password must be at least 6 characters"),
 });
 
+const signInDataSchema = z.object({
+  email: z.string().email({ message: "Enter a valid email" }),
+  password: z.string().min(6, "The password must be at least 6 characters"),
+});
+
 type signUpDataSchema = z.infer<typeof signUpDataSchema>;
+
+type signInDataSchema = z.infer<typeof signInDataSchema>;
 
 export default function Home() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
@@ -33,7 +40,16 @@ export default function Home() {
   } = useForm<signUpDataSchema>({
     resolver: zodResolver(signUpDataSchema),
   });
-  console.log(errors);
+
+  const {
+    register: signInRegister,
+    handleSubmit: handleSignInSubmit,
+    formState: { errors: signInErrors },
+  } = useForm<signInDataSchema>({
+    resolver: zodResolver(signInDataSchema),
+  });
+
+  console.log(signInErrors);
   const handleSignUpClick = () => {
     setIsRightPanelActive(true);
   };
@@ -46,8 +62,8 @@ export default function Home() {
     console.log(data);
   }
 
-  async function handleLogin(event: FormEvent) {
-    event.preventDefault();
+  async function handleLogin(data: signInDataSchema) {
+    console.log(data);
   }
 
   return (
@@ -104,7 +120,7 @@ export default function Home() {
           </div>
           {/* login div part */}
           <div className={styles.signIn}>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSignInSubmit(handleLogin)}>
               <Image src={logoImage} alt="Logo" className={styles.logo} />
               <h1 className={styles.title}>sign In</h1>
 
@@ -127,12 +143,24 @@ export default function Home() {
               </div>
               <p className={styles.p}>or use your account</p>
 
-              <input className={styles.inputPlace} type="email" placeholder="Email" />
-              <input className={styles.inputPlace} type="password" placeholder="Password" />
+              <input
+                className={styles.inputPlace}
+                type="email"
+                placeholder="Email"
+                {...signInRegister("email")}
+              />
+              {signInErrors && <p className={styles.errors}>{signInErrors.email?.message}</p>}
+              <input
+                className={styles.inputPlace}
+                type="password"
+                placeholder="Password"
+                {...signInRegister("password")}
+              />
+              {signInErrors && <p className={styles.errors}>{signInErrors.password?.message}</p>}
               <a href="#" className={styles.icon}>
                 Forget your Password?
               </a>
-              <button onClick={handleLogin} id={styles.signUpButton} className={styles.buttonPut}>
+              <button id={styles.signUpButton} className={styles.buttonPut}>
                 Sign In
               </button>
             </form>
