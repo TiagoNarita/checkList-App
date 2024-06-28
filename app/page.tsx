@@ -8,6 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import logoImage from "../public/Gray and Black Simple Studio Logo.png";
 import Image from "next/image";
+import { Button } from "@nextui-org/react";
 
 const signUpDataSchema = z.object({
   name: z.string().min(1, "Name is required"),
