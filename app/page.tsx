@@ -141,7 +141,9 @@ export default function Home() {
                   </i>
                 </a>
               </div>
-              <p className={styles.p}>or use your account</p>
+              <p className={styles.p} id={styles.useAccount}>
+                or use your account
+              </p>
 
               <input
                 className={styles.inputPlace}
